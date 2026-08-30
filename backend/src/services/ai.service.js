@@ -404,7 +404,9 @@ Do not add explanations outside the JSON object.
 
 async function generatePdfFromHtml(htmlContent) {
   if (!htmlContent?.trim()) {
-    throw new Error("HTML content is required.");
+    throw new Error(
+      "HTML content is required."
+    );
   }
 
   let browser;
@@ -413,35 +415,41 @@ async function generatePdfFromHtml(htmlContent) {
     browser = await puppeteer.launch({
       headless: true,
 
-      executablePath:
-        "/opt/render/.cache/puppeteer/chrome/linux-152.0.7977.54/chrome-linux64/chrome",
-
       args: [
         "--no-sandbox",
         "--disable-setuid-sandbox",
       ],
     });
 
-    const page = await browser.newPage();
+    const page =
+      await browser.newPage();
 
-    await page.setContent(htmlContent, {
-      waitUntil: "networkidle0",
-    });
+    await page.setContent(
+      htmlContent,
+      {
+        waitUntil: "networkidle0",
+      }
+    );
 
-    await page.emulateMediaType("print");
+    await page.emulateMediaType(
+      "print"
+    );
 
-    const pdfBuffer = await page.pdf({
-      format: "A4",
-      printBackground: true,
-      preferCSSPageSize: true,
+    const pdfBuffer =
+      await page.pdf({
+        format: "A4",
 
-      margin: {
-        top: "10mm",
-        right: "10mm",
-        bottom: "10mm",
-        left: "10mm",
-      },
-    });
+        printBackground: true,
+
+        preferCSSPageSize: true,
+
+        margin: {
+          top: "10mm",
+          right: "10mm",
+          bottom: "10mm",
+          left: "10mm",
+        },
+      });
 
     return pdfBuffer;
   } catch (error) {
