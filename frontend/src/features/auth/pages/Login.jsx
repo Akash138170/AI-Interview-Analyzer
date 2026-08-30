@@ -5,7 +5,7 @@ import { useAuth } from "../hooks/useAuth";
 
 function Login() {
   const navigate = useNavigate();
-  const { loading, handleLogin } = useAuth();
+  const {  handleLogin } = useAuth();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -78,13 +78,6 @@ function Login() {
     }
   };
 
-  if (loading) {
-    return (
-      <main>
-        <h1>Loading</h1>
-      </main>
-    );
-  }
 
   return (
     <main className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-indigo-950 flex items-center justify-center px-4 py-8">
