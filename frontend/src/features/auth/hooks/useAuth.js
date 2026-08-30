@@ -8,28 +8,24 @@ export const useAuth = () => {
 
   const { user, setUser, loading, setLoading } = context;
 
-  const handleLogin = async ({ email, password }) => {
-    setLoading(true);
+const handleLogin = async ({ email, password }) => {
+  try {
+    const data = await login({
+      email: email.trim(),
+      password,
+    });
 
-    try {
-      const data = await login({
-        email: email.trim(),
-        password,
-      });
+    setUser(data.user);
 
-      setUser(data.user);
-
-      return data;
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error;
-    } finally {
-      setLoading(false);
-    }
-  };
+    return data;
+  } catch (error) {
+    console.error("Login failed:", error);
+    throw error;
+  }
+};
 
   const handleRegister = async ({ username, email, password }) => {
-    setLoading(true);
+   
 
     try {
       const data = await register({
@@ -44,13 +40,11 @@ export const useAuth = () => {
     } catch (error) {
       console.error("Registration failed:", error);
       throw error;
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   const handleLogout = async () => {
-    setLoading(true);
+    
 
     try {
       await logOut();
@@ -58,9 +52,7 @@ export const useAuth = () => {
     } catch (error) {
       console.error("Logout failed:", error);
       throw error;
-    } finally {
-      setLoading(false);
-    }
+    } 
   };
 
   useEffect(() => {
