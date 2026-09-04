@@ -7,7 +7,7 @@
 
 Add the deployed frontend URL here:
 
-`Coming soon`
+https://ai-interview-analyzer-xi.vercel.app/
 
 ## Features
 
